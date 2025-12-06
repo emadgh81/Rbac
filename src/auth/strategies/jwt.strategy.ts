@@ -2,6 +2,7 @@ import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { RoleEnum } from 'src/common/enum/roles.enum';
 import {
   IUserRepository,
   UserRepositoryInterface,
@@ -10,7 +11,7 @@ import {
 interface JwtPayload {
   sub: number;
   email: string;
-  roles: string[];
+  roles: RoleEnum[];
 }
 
 @Injectable()
