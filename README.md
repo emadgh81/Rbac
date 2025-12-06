@@ -10,12 +10,12 @@ You can create users, assign roles, manage permissions, and enforce access contr
 ⸻
 
 🚀 Features
-	•	Full CRUD functionality for Users, Roles, and Permissions
-	•	Role-Based Access Control (RBAC) with permissions
-	•	JWT authentication for secure login
-	•	Modular backend architecture using NestJS modules, controllers, and services
-	•	Type-safe development using TypeScript
-	•	Data validation using class-validator
-	•	RESTful API design
-	•	MySQL relational database support
-	•	Swagger API documentation available at /api
+• Full CRUD functionality for Users, Roles, and Permissions
+• Role-Based Access Control (RBAC) with permissions
+• JWT authentication for secure login
+• Modular backend architecture using NestJS modules, controllers, and services
+• Type-safe development using TypeScript
+• Data validation using class-validator
+• RESTful API design
+• MySQL relational database support
+• Swagger API documentation available at /api

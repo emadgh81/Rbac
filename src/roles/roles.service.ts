@@ -6,14 +6,22 @@ import {
 } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { IRoleRepository } from './repository/roles.repository';
-import { IUserRepository } from 'src/users/repository/user.repository';
+import {
+  IRoleRepository,
+  RoleRepositoryInterface,
+} from './repository/roles.repository';
+import {
+  IUserRepository,
+  UserRepositoryInterface,
+} from 'src/users/repository/user.repository';
 
 @Injectable()
 export class RolesService {
   constructor(
-    @Inject('IRoleRepository') private readonly roleRepo: IRoleRepository,
-    @Inject('IUserRepository') private readonly userRepo: IUserRepository,
+    @Inject(IRoleRepository)
+    private readonly roleRepo: RoleRepositoryInterface,
+    @Inject(IUserRepository)
+    private readonly userRepo: UserRepositoryInterface,
   ) {}
   async create(createRoleDto: CreateRoleDto) {
     const exists = await this.roleRepo.findByName(createRoleDto.name);

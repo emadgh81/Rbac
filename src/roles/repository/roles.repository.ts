@@ -3,7 +3,9 @@ import { Role } from '../entities/role.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-export interface IRoleRepository {
+export const IRoleRepository = 'IRoleRepository';
+
+export interface RoleRepositoryInterface {
   findAll(): Promise<Role[]>;
   findById(id: number): Promise<Role | null>;
   findByName(name: string): Promise<Role | null>;
@@ -13,7 +15,7 @@ export interface IRoleRepository {
 }
 
 @Injectable()
-export class RoleRepository implements IRoleRepository {
+export class RoleRepository implements RoleRepositoryInterface {
   constructor(
     @InjectRepository(Role) private readonly repo: Repository<Role>,
   ) {}

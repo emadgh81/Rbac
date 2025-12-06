@@ -6,15 +6,21 @@ import {
 } from '@nestjs/common';
 import { CreatePermissionDto } from './dto/create-permission.dto';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
-import { PermissionsRepository } from './repository/permissions.repository';
-import { RoleRepository } from 'src/roles/repository/roles.repository';
+import {
+  IPermissionsRepository,
+  PermissionsRepositoryInterface,
+} from './repository/permissions.repository';
+import {
+  IRoleRepository,
+  RoleRepositoryInterface,
+} from 'src/roles/repository/roles.repository';
 
 @Injectable()
 export class PermissionsService {
   constructor(
-    @Inject('IPermissionRepository')
-    private readonly permissionRepo: PermissionsRepository,
-    @Inject('IRoleRepository') private readonly roleRepo: RoleRepository,
+    @Inject(IPermissionsRepository)
+    private readonly permissionRepo: PermissionsRepositoryInterface,
+    @Inject(IRoleRepository) private readonly roleRepo: RoleRepositoryInterface,
   ) {}
   async create(createPermissionDto: CreatePermissionDto) {
     const exists = await this.permissionRepo.findByName(

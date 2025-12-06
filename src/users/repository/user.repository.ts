@@ -3,7 +3,8 @@ import { User } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-export interface IUserRepository {
+export const IUserRepository = 'IUserRepository';
+export interface UserRepositoryInterface {
   findById(id: number): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
   createAndSave(user: Partial<User>): Promise<User>;
@@ -13,7 +14,7 @@ export interface IUserRepository {
 }
 
 @Injectable()
-export class UserRepository implements IUserRepository {
+export class UserRepository implements UserRepositoryInterface {
   constructor(
     @InjectRepository(User) private readonly repo: Repository<User>,
   ) {}

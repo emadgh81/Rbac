@@ -6,7 +6,10 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { IUserRepository } from './repository/user.repository';
+import {
+  IUserRepository,
+  UserRepositoryInterface,
+} from './repository/user.repository';
 import * as bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
 import { plainToInstance } from 'class-transformer';
@@ -14,7 +17,8 @@ import { plainToInstance } from 'class-transformer';
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject('IUserRepository') private readonly userRepo: IUserRepository,
+    @Inject(IUserRepository)
+    private readonly userRepo: UserRepositoryInterface,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {

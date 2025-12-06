@@ -3,7 +3,9 @@ import { Permission } from '../entities/permission.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-export interface IPermissionsRepository {
+export const IPermissionsRepository = 'IPermissionsRepository';
+
+export interface PermissionsRepositoryInterface {
   findAll(): Promise<Permission[]>;
   findById(id: number): Promise<Permission | null>;
   findByName(name: string): Promise<Permission | null>;
@@ -13,7 +15,7 @@ export interface IPermissionsRepository {
 }
 
 @Injectable()
-export class PermissionsRepository implements IPermissionsRepository {
+export class PermissionsRepository implements PermissionsRepositoryInterface {
   constructor(
     @InjectRepository(Permission) private readonly repo: Repository<Permission>,
   ) {}

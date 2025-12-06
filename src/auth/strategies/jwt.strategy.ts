@@ -2,7 +2,10 @@ import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { IUserRepository } from 'src/users/repository/user.repository';
+import {
+  IUserRepository,
+  UserRepositoryInterface,
+} from 'src/users/repository/user.repository';
 
 interface JwtPayload {
   sub: number;
@@ -14,7 +17,8 @@ interface JwtPayload {
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly config: ConfigService,
-    @Inject('IUserRepository') private readonly userRepo: IUserRepository,
+    @Inject(IUserRepository)
+    private readonly userRepo: UserRepositoryInterface,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

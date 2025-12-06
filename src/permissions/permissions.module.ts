@@ -3,8 +3,14 @@ import { PermissionsService } from './permissions.service';
 import { PermissionsController } from './permissions.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from 'src/roles/entities/role.entity';
-import { PermissionsRepository } from './repository/permissions.repository';
-import { RoleRepository } from 'src/roles/repository/roles.repository';
+import {
+  IPermissionsRepository,
+  PermissionsRepository,
+} from './repository/permissions.repository';
+import {
+  IRoleRepository,
+  RoleRepository,
+} from 'src/roles/repository/roles.repository';
 import { Permission } from './entities/permission.entity';
 
 @Module({
@@ -13,14 +19,14 @@ import { Permission } from './entities/permission.entity';
   providers: [
     PermissionsService,
     {
-      provide: 'IPermissionRepository',
+      provide: IPermissionsRepository,
       useClass: PermissionsRepository,
     },
     {
-      provide: 'IRoleRepository',
+      provide: IRoleRepository,
       useClass: RoleRepository,
     },
   ],
-  exports: ['IPermissionRepository'],
+  exports: [IPermissionsRepository],
 })
 export class PermissionsModule {}
